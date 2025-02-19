@@ -1,0 +1,31 @@
+version: '3.9'
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: medspa_db
+      POSTGRES_USER: medspa_user
+      POSTGRES_PASSWORD: medspa_password
+    ports:
+      - "5433:5432"  # Changed the host port to 5433
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      # Django will read these to construct the DATABASES setting
+      DB_NAME: medspa_db
+      DB_USER: medspa_user
+      DB_PASSWORD: medspa_password
+      DB_HOST: db
+
+volumes:
+  postgres_data:
