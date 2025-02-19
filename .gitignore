@@ -28,6 +28,8 @@ db.sqlite3
 db.sqlite3-journal
 media/
 staticfiles/
+medspa_api/migrations/*.py
+!medspa_api/migrations/__init__.py
 
 # Environment variables
 .env

@@ -18,7 +18,6 @@ class AppointmentSerializer(serializers.ModelSerializer):
     service_ids = serializers.PrimaryKeyRelatedField(
         queryset=Service.objects.all(), many=True, write_only=True, required=True
     )
-    # Optionally include service details in the response
     services = ServiceSerializer(many=True, read_only=True)
 
     class Meta:

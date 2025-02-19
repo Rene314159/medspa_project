@@ -17,6 +17,8 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+AUTH_USER_MODEL = 'medspa_api.User'
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -140,7 +142,6 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
     ],
-    # Throttling: limit the number of requests per user or anonymous IP
     'DEFAULT_THROTTLE_CLASSES': [
         'rest_framework.throttling.AnonRateThrottle',  
         'rest_framework.throttling.UserRateThrottle',  
@@ -149,8 +150,7 @@ REST_FRAMEWORK = {
         'anon': '10/day',   
         'user': '100/hour',  
     },
-    # Filtering: if you're using django-filter for advanced filtering in your viewsets
-    'DEFAULT_FILTER_BACKENDS': [
+      'DEFAULT_FILTER_BACKENDS': [
         'django_filters.rest_framework.DjangoFilterBackend',
         'rest_framework.filters.OrderingFilter',
     ],
