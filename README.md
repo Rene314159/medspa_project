@@ -21,8 +21,10 @@ This is a **Django REST Framework (DRF)**-based API that allows users to manage 
 
 ### **1️⃣ Clone the Repository**
 ```bash
-git clone <your-repo-url>
-cd <your-project-folder>
+
+git clone git@github.com:Rene314159/medspa_project.git
+cd medspa_project
+
 2️⃣ Create a Virtual Environment
 python -m venv venv
 source venv/bin/activate  # On Mac/Linux
