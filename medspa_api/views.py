@@ -3,8 +3,8 @@ from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
 from django.db import transaction
 
-from .models import Service, Appointment
-from .serializers import ServiceSerializer, AppointmentSerializer
+from .models import Service, Appointment, Medspa
+from .serializers import ServiceSerializer, AppointmentSerializer, MedspaSerializer
 
 # Custom permission: only allow the owner (or medspa admin) to modify a record.
 class IsOwnerOrReadOnly(permissions.BasePermission):
@@ -77,3 +77,17 @@ class AppointmentViewSet(viewsets.ModelViewSet):
         # Allow partial updates, but if services are updated, recalc totals.
         with transaction.atomic():
             return super().partial_update(request, *args, **kwargs)
+        
+
+class MedspaViewSet(viewsets.ModelViewSet):
+    """
+    CRUD endpoint for Medspas.
+    - Create: Add a new medspa record.
+    - Retrieve: Get a medspa record by ID.
+    - Update: Modify medspa details.
+    - List: Get all medspas.
+    """
+    queryset = Medspa.objects.all()
+    serializer_class = MedspaSerializer
+    permission_classes = [permissions.IsAuthenticated]
+

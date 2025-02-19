@@ -7,9 +7,14 @@ services:
       POSTGRES_USER: medspa_user
       POSTGRES_PASSWORD: medspa_password
     ports:
-      - "5433:5432"  # Changed the host port to 5433
+      - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U medspa_user -d medspa_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   web:
     build: .
@@ -19,9 +24,9 @@ services:
     ports:
       - "8000:8000"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     environment:
-      # Django will read these to construct the DATABASES setting
       DB_NAME: medspa_db
       DB_USER: medspa_user
       DB_PASSWORD: medspa_password
@@ -29,3 +34,4 @@ services:
 
 volumes:
   postgres_data:
+  

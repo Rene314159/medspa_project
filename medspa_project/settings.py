@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-lel5e$cy-_6(r7wahd_-f_!6-u*d^57b6(ax2_7$g%$l)!5opa
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '0.0.0.0', '127.0.0.1']
 
 
 # Application definition
@@ -85,7 +85,7 @@ DATABASES = {
         'NAME': os.environ.get('DB_NAME', 'medspa_db'),
         'USER': os.environ.get('DB_USER', 'medspa_user'),
         'PASSWORD': os.environ.get('DB_PASSWORD', 'medspa_password'),
-        'HOST': os.environ.get('DB_HOST', 'localhost'),  # 'db' in docker-compose
+        'HOST': os.environ.get('DB_HOST', 'db'),  
         'PORT': '5432',
     }
 }
